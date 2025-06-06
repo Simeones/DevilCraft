@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
 import { usePathname } from "next/navigation"
+import LanguageSwitcher from "@/components/language-switcher"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -83,6 +84,9 @@ export default function Navbar() {
           <NavLink href="/kontakt" active={isActive("/kontakt")}>
             Kontakt
           </NavLink>
+          <div className="ml-4">
+            <LanguageSwitcher />
+          </div>
         </nav>
 
         {/* Mobile Navigation */}
@@ -135,6 +139,9 @@ export default function Navbar() {
               <MobileNavLink href="/kontakt" active={isActive("/kontakt")} onClick={() => setIsOpen(false)}>
                 Kontakt
               </MobileNavLink>
+              <div className="mt-6 pt-4 border-t border-gray-700">
+                <LanguageSwitcher />
+              </div>
             </nav>
           </SheetContent>
         </Sheet>

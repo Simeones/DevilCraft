@@ -6,7 +6,7 @@ import Preloader from "@/components/preloader"
 import Navbar from "@/components/navbar"
 import CustomerReviews from "@/components/customer-reviews"
 import ScrollReset from "@/components/scroll-reset"
-import AiChat from "@/components/ai-chat"
+import SocialMediaButtons from "@/components/instagram-button"
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -29,7 +29,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pl" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
       </head>
       <body className={`${montserrat.variable} ${poppins.variable} font-sans`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
@@ -38,7 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Navbar />
           <div className="pt-16">{children}</div>
           <CustomerReviews />
-          <AiChat />
+          <SocialMediaButtons />
         </ThemeProvider>
       </body>
     </html>

@@ -1,6 +1,6 @@
 "use server"
 
-import nodemailer from "nodemailer"
+// Ten plik korzysta z Resend API – dodaj RESEND_API_KEY w ustawieniach środowiska
 
 export async function sendContactEmail(formData: FormData) {
   const name = formData.get("name") as string
@@ -17,17 +17,6 @@ export async function sendContactEmail(formData: FormData) {
   }
 
   try {
-    // Konfiguracja transportera SMTP
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number.parseInt(process.env.SMTP_PORT || "587"),
-      secure: process.env.SMTP_SECURE === "true",
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASSWORD,
-      },
-    })
-
     // Treść emaila
     const htmlContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -60,14 +49,26 @@ export async function sendContactEmail(formData: FormData) {
       </div>
     `
 
-    // Wysłanie emaila
-    await transporter.sendMail({
-      from: `"RDM Custom - Formularz" <${process.env.SMTP_USER}>`,
-      to: "szymonnl321@gmail.com", // Zmieniony adres docelowy
-      subject: `🚗 Nowe zapytanie od ${name} - RDM Custom`,
-      html: htmlContent,
-      replyTo: email,
+    // Wysyłanie e-maila przez Resend
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+      },
+      body: JSON.stringify({
+        from: "RDM Custom <no-reply@rdmcustom.pl>",
+        to: ["szymonnl321@gmail.com"],
+        reply_to: email,
+        subject: `🚗 Nowe zapytanie od ${name} - RDM Custom`,
+        html: htmlContent,
+      }),
     })
+
+    if (!response.ok) {
+      const err = await response.text()
+      throw new Error(err)
+    }
 
     return {
       success: true,

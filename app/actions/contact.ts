@@ -63,7 +63,7 @@ export async function sendContactEmail(formData: FormData) {
     // Wysłanie emaila
     await transporter.sendMail({
       from: `"RDM Custom - Formularz" <${process.env.SMTP_USER}>`,
-      to: process.env.SMTP_USER, // Email firmy
+      to: "szymonnl321@gmail.com", // Zmieniony adres docelowy
       subject: `🚗 Nowe zapytanie od ${name} - RDM Custom`,
       html: htmlContent,
       replyTo: email,

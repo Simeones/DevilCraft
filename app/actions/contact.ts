@@ -18,7 +18,7 @@ export async function sendContactEmail(formData: FormData) {
 
   try {
     // Konfiguracja transportera SMTP
-    const transporter = nodemailer.createTransporter({
+    const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: Number.parseInt(process.env.SMTP_PORT || "587"),
       secure: process.env.SMTP_SECURE === "true",

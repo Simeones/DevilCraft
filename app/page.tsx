@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Phone, Mail, MapPin, Wrench, Zap, Settings, Star } from "lucide-react"
+import ContactForm from "@/components/contact-form"
 
 export default function RDMCustomPage() {
   return (
@@ -217,29 +218,27 @@ export default function RDMCustomPage() {
                       <span className="text-gray-300">ul. Tuningowa 123, 00-000 Warszawa</span>
                     </div>
                   </div>
+                  <div className="mt-6 pt-6 border-t border-gray-600">
+                    <h4 className="text-lg font-semibold text-white mb-4">Godziny otwarcia</h4>
+                    <div className="space-y-2 text-gray-300 text-sm">
+                      <div className="flex justify-between">
+                        <span>Poniedziałek - Piątek:</span>
+                        <span>8:00 - 18:00</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Sobota:</span>
+                        <span>9:00 - 15:00</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Niedziela:</span>
+                        <span>Zamknięte</span>
+                      </div>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
 
-              <Card className="bg-black/60 backdrop-blur-sm border-red-500/20">
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-6">Godziny otwarcia</h3>
-                  <div className="space-y-2 text-gray-300">
-                    <div className="flex justify-between">
-                      <span>Poniedziałek - Piątek:</span>
-                      <span>8:00 - 18:00</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Sobota:</span>
-                      <span>9:00 - 15:00</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Niedziela:</span>
-                      <span>Zamknięte</span>
-                    </div>
-                  </div>
-                  <Button className="w-full mt-6 bg-red-500 hover:bg-red-600">Umów wizytę</Button>
-                </CardContent>
-              </Card>
+              <ContactForm />
             </div>
           </div>
         </section>

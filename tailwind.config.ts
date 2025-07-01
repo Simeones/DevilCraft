@@ -9,7 +9,6 @@ const config: Config = {
     "./src/**/*.{ts,tsx}",
     "*.{js,ts,jsx,tsx,mdx}",
   ],
-  prefix: "",
   theme: {
     container: {
       center: true,
@@ -19,7 +18,23 @@ const config: Config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-poppins)", "sans-serif"],
+        montserrat: ["var(--font-montserrat)", "sans-serif"],
+      },
       colors: {
+        red: {
+          50: "#fff5f5",
+          100: "#ffe0e0",
+          200: "#ffc1c1",
+          300: "#ffa3a3",
+          400: "#ff8484",
+          500: "#ff6565",
+          600: "#ff0000", // Main red color (#FF0000)
+          700: "#e50000",
+          800: "#cc0000",
+          900: "#b30000",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -53,19 +68,6 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Vintage mushroom theme colors
-        amber: {
-          50: "#fffbeb",
-          100: "#fef3c7",
-          200: "#fde68a",
-          300: "#fcd34d",
-          400: "#fbbf24",
-          500: "#f59e0b",
-          600: "#d97706",
-          700: "#b45309",
-          800: "#92400e",
-          900: "#78350f",
-        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -89,6 +91,6 @@ const config: Config = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+}
 
 export default config

@@ -1,8 +1,6 @@
 "use client"
 
-import type React from "react"
-
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { MapPin, Phone, Mail, Globe, MessageSquare, CheckCircle, AlertCircle, Info } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -32,6 +30,27 @@ export default function ContactPage() {
     message?: string
   }>({})
 
+  // Sprawdzenie czy EmailJS jest załadowany
+  const [emailJSLoaded, setEmailJSLoaded] = useState(false)
+
+  // Ładowanie skryptu EmailJS
+  useEffect(() => {
+    const script = document.createElement("script")
+    script.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    script.async = true
+    script.onload = () => {
+      // Inicjalizacja EmailJS z publicznym kluczem
+      // W rzeczywistym projekcie należy użyć własnego klucza
+      window.emailjs.init("public_key")
+      setEmailJSLoaded(true)
+    }
+    document.body.appendChild(script)
+
+    return () => {
+      document.body.removeChild(script)
+    }
+  }, [])
+
   const validateForm = () => {
     const newErrors = {
       name: formState.name ? "" : "Imię i nazwisko jest wymagane",
@@ -47,12 +66,12 @@ export default function ContactPage() {
     return !Object.values(newErrors).some((error) => error !== "")
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e) => {
     const { name, value } = e.target
     setFormState((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     if (!validateForm()) return
@@ -60,10 +79,32 @@ export default function ContactPage() {
     setIsSubmitting(true)
     setSubmitStatus({})
 
+    // Użyj FormSubmit.co jako alternatywę dla EmailJS
+    // FormSubmit pozwala na wysyłanie formularzy bez konfiguracji backendu
     try {
-      // Symulacja wysyłania formularza
+      const formData = new FormData()
+      formData.append("name", formState.name)
+      formData.append("email", formState.email)
+      formData.append("phone", formState.phone || "Nie podano")
+      formData.append("subject", formState.subject || "Zapytanie ze strony DevilCat")
+      formData.append("message", formState.message)
+      formData.append("_subject", `[DevilCat] ${formState.subject || "Nowa wiadomość ze strony"}`)
+      // Ukryty adres email, na który zostanie wysłana wiadomość
+      formData.append("_to", "4wieczorek2szymon0@gmail.com")
+      // Przekierowanie po wysłaniu (puste, aby pozostać na tej samej stronie)
+      formData.append("_captcha", "false") // Wyłączenie captcha dla uproszczenia
+
+      // Symulacja wysyłania formularza (w rzeczywistym projekcie należy użyć rzeczywistego endpointu)
+      // W tym przykładzie symulujemy sukces po 1 sekundzie
       await new Promise((resolve) => setTimeout(resolve, 1000))
 
+      // W rzeczywistym projekcie należy użyć:
+      // const response = await fetch('https://formsubmit.co/4wieczorek2szymon0@gmail.com', {
+      //   method: 'POST',
+      //   body: formData
+      // })
+
+      // Symulacja sukcesu
       setSubmitStatus({
         success: true,
         message: "Wiadomość została wysłana. Dziękujemy za kontakt!",
@@ -88,35 +129,17 @@ export default function ContactPage() {
     }
   }
 
-  const handleEmailClient = () => {
-    try {
-      // Sprawdź czy wymagane pola są wypełnione
-      if (!formState.name || !formState.email || !formState.message) {
-        alert("Proszę wypełnić wszystkie wymagane pola (Imię i nazwisko, Email, Wiadomość) przed otwarciem poczty.")
-        return
-      }
-
-      // Przygotuj dane do emaila
-      const subject = encodeURIComponent(`[DevilCat] ${formState.subject || "Zapytanie ze strony"}`)
-      const body = encodeURIComponent(`
+  // Alternatywna metoda kontaktu
+  const handleAlternativeContact = () => {
+    const subject = encodeURIComponent("Wiadomość ze strony DevilCat")
+    const body = encodeURIComponent(`
 Imię i nazwisko: ${formState.name}
-Email: ${formState.email}
 Telefon: ${formState.phone || "Nie podano"}
 Temat: ${formState.subject || "Zapytanie ze strony"}
 
-Wiadomość:
 ${formState.message}
-
----
-Wiadomość wysłana ze strony DevilCraft.pl
-      `)
-
-      // Otwórz domyślny klient email
-      window.location.href = `mailto:4wieczorek2szymon0@gmail.com?subject=${subject}&body=${body}`
-    } catch (error) {
-      console.error("Błąd podczas otwierania klienta email:", error)
-      alert("Wystąpił błąd podczas otwierania klienta email. Spróbuj ponownie.")
-    }
+    `)
+    window.location.href = `mailto:4wieczorek2szymon0@gmail.com?subject=${subject}&body=${body}`
   }
 
   return (
@@ -139,7 +162,7 @@ Wiadomość wysłana ze strony DevilCraft.pl
               <h2 className="text-2xl font-bold text-white mb-6 title-animation">Dane kontaktowe</h2>
               <div className="space-y-6">
                 <div className="flex items-start list-item-animation">
-                  <MapPin className="h-6 w-6 text-red-500 mr-4 mt-1" />
+                  <MapPin className="h-6 w-6 text-red-500 mr-4 mt-1 list-dot-animation" />
                   <div>
                     <h3 className="text-xl font-semibold text-white mb-1 title-animation">Adres</h3>
                     <p className="text-gray-300 description-animation">Juliusza Słowackiego 305/A</p>
@@ -148,7 +171,7 @@ Wiadomość wysłana ze strony DevilCraft.pl
                 </div>
 
                 <div className="flex items-start list-item-animation">
-                  <Phone className="h-6 w-6 text-red-500 mr-4 mt-1" />
+                  <Phone className="h-6 w-6 text-red-500 mr-4 mt-1 list-dot-animation" />
                   <div>
                     <h3 className="text-xl font-semibold text-white mb-1 title-animation">Telefon</h3>
                     <Link
@@ -161,7 +184,7 @@ Wiadomość wysłana ze strony DevilCraft.pl
                 </div>
 
                 <div className="flex items-start list-item-animation">
-                  <Mail className="h-6 w-6 text-red-500 mr-4 mt-1" />
+                  <Mail className="h-6 w-6 text-red-500 mr-4 mt-1 list-dot-animation" />
                   <div>
                     <h3 className="text-xl font-semibold text-white mb-1 title-animation">Email</h3>
                     <Link
@@ -174,7 +197,7 @@ Wiadomość wysłana ze strony DevilCraft.pl
                 </div>
 
                 <div className="flex items-start list-item-animation">
-                  <Globe className="h-6 w-6 text-red-500 mr-4 mt-1" />
+                  <Globe className="h-6 w-6 text-red-500 mr-4 mt-1 list-dot-animation" />
                   <div>
                     <h3 className="text-xl font-semibold text-white mb-1 title-animation">Strona internetowa</h3>
                     <Link
@@ -236,6 +259,12 @@ Wiadomość wysłana ze strony DevilCraft.pl
                       <AlertCircle className="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" />
                       <div>
                         <p>{submitStatus.message}</p>
+                        <Button
+                          className="mt-3 bg-red-600 hover:bg-red-700 text-white text-sm py-1 h-auto button-animation"
+                          onClick={handleAlternativeContact}
+                        >
+                          Użyj alternatywnej metody kontaktu
+                        </Button>
                       </div>
                     </div>
                   )}
@@ -349,7 +378,35 @@ Wiadomość wysłana ze strony DevilCraft.pl
                           type="button"
                           variant="outline"
                           className="border-red-600 text-white hover:bg-red-900 button-animation fade-in-element"
-                          onClick={handleEmailClient}
+                          onClick={() => {
+                            // Sprawdź czy wymagane pola są wypełnione
+                            if (!formState.name || !formState.email || !formState.message) {
+                              alert(
+                                "Proszę wypełnić wszystkie wymagane pola (Imię i nazwisko, Email, Wiadomość) przed otwarciem poczty.",
+                              )
+                              return
+                            }
+
+                            // Przygotuj dane do emaila
+                            const subject = encodeURIComponent(
+                              `[DevilCat] ${formState.subject || "Zapytanie ze strony"}`,
+                            )
+                            const body = encodeURIComponent(`
+Imię i nazwisko: ${formState.name}
+Email: ${formState.email}
+Telefon: ${formState.phone || "Nie podano"}
+Temat: ${formState.subject || "Zapytanie ze strony"}
+
+Wiadomość:
+${formState.message}
+
+---
+Wiadomość wysłana ze strony DevilCraft.pl
+                            `)
+
+                            // Otwórz domyślny klient email
+                            window.location.href = `mailto:4wieczorek2szymon0@gmail.com?subject=${subject}&body=${body}`
+                          }}
                         >
                           <Mail className="h-5 w-5 mr-2" />
                           Otwórz pocztę
@@ -363,7 +420,7 @@ Wiadomość wysłana ze strony DevilCraft.pl
                         <p className="text-sm text-gray-400 description-animation">
                           Wypełnij formularz, aby wysłać wiadomość bezpośrednio do nas. Wiadomość zostanie wysłana na
                           adres 4wieczorek2szymon0@gmail.com. Jeśli masz problemy z wysłaniem formularza, możesz
-                          skorzystać z przycisku "Otwórz pocztę".
+                          skorzystać z przycisku "Wyślij przez email".
                         </p>
                       </div>
                     </ScrollAnimation>

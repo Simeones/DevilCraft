@@ -89,6 +89,9 @@ export default function ModelsPage() {
                       </div>
                     ))}
                   </div>
+                  <div className="absolute bottom-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded-md">
+                    {model.images.length} zdjęć
+                  </div>
                 </div>
                 <CardContent className="p-6">
                   <h2 className="text-2xl font-bold text-white mb-2 title-animation">{model.name}</h2>

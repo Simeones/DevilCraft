@@ -1,6 +1,0 @@
-{
-  // Tell Vercel how to install and build
-  "installCommand": "pnpm install", // no --frozen-lockfile flag
-  "buildCommand": "pnpm run vercel-build", // default build script
-  "outputDirectory": ".next"
-}

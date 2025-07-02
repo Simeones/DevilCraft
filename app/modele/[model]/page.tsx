@@ -49,6 +49,9 @@ const modelData: Record<string, ModelData> = {
       "/boat-full-view.jpeg",
       "/boat-angle-view.jpeg",
       "/boat-interior-led.jpeg",
+      "/model-boat-top-view.jpeg",
+      "/model-boat-led-night.jpeg",
+      "/model-boat-equipment.jpeg",
     ],
     specs: {
       "Długość całkowita": "472 cm",

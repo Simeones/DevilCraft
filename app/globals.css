@@ -2,85 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
+    --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
     --radius: 0.5rem;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.5% 48%;
   }
 }
 
@@ -91,4 +56,270 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@layer utilities {
+  .font-montserrat {
+    font-family: var(--font-montserrat);
+  }
+
+  .font-poppins {
+    font-family: var(--font-poppins);
+  }
+}
+
+@keyframes pulse-scale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-pulse-scale {
+  animation: pulse-scale 2s infinite ease-in-out;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out;
+}
+
+/* Ensure navbar is always visible */
+header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  z-index: 9999 !important;
+}
+
+/* Scroll animation classes */
+.animate-in {
+  opacity: 1 !important;
+  transform: translateX(0) translateY(0) !important;
+  filter: brightness(1) !important;
+}
+
+.animate-out {
+  opacity: 0;
+  transform: translateY(8px);
+  filter: brightness(0.7);
+}
+
+/* Child animation classes */
+.animate-in-child {
+  opacity: 1 !important;
+  transform: translateX(0) translateY(0) !important;
+  filter: brightness(1) !important;
+}
+
+.animate-out-child {
+  opacity: 0;
+  transform: translateY(8px);
+  filter: brightness(0.7);
+}
+
+/* Dark effect for animations */
+.dark-effect {
+  filter: brightness(0.7);
+  transition: filter 0.5s ease-out;
+}
+
+/* Unified animation styles */
+.feature-card {
+  @apply bg-gray-900 p-8 rounded-lg border border-gray-800 transition-all duration-300;
+}
+
+.feature-card:hover {
+  @apply border-red-600 bg-gray-800 shadow-lg shadow-red-900/20 transform -translate-y-1;
+}
+
+.title-animation {
+  @apply transition-colors duration-200;
+}
+
+.title-animation:hover {
+  @apply text-red-500;
+}
+
+.description-animation {
+  @apply transition-all duration-200;
+}
+
+.description-animation:hover {
+  @apply text-white;
+}
+
+.button-animation {
+  @apply transition-all duration-200;
+}
+
+.button-animation:hover {
+  @apply transform scale-105 shadow-lg shadow-red-900/30;
+}
+
+.list-item-animation {
+  @apply transition-transform duration-200;
+}
+
+.list-item-animation:hover {
+  @apply translate-x-2;
+}
+
+.list-dot-animation {
+  @apply transition-all duration-200;
+}
+
+.list-item-animation:hover .list-dot-animation {
+  @apply bg-red-400 scale-150;
+}
+
+/* Image hover effects */
+.image-hover-container {
+  @apply overflow-hidden relative;
+}
+
+.image-hover-effect {
+  @apply object-cover transition-all duration-500;
+}
+
+.image-hover-container:hover .image-hover-effect {
+  @apply scale-105 brightness-110;
+}
+
+.image-overlay {
+  @apply absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 transition-opacity duration-300;
+}
+
+.image-hover-container:hover .image-overlay {
+  @apply opacity-100;
+}
+
+/* Fade-in element animation */
+.fade-in-element {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+}
+
+/* Stagger container and cascade effects */
+.stagger-container > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+}
+
+.cascade-container .cascade-item {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+}
+
+/* Animation for staggered children when parent is in view */
+.animate-in .fade-in-element,
+.animate-in.fade-in-element,
+.animate-in .stagger-container > *,
+.animate-in-child {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Cascade animation with different delays - przyspieszenie o 500ms */
+.cascade-item-0 {
+  transition-delay: 0ms;
+}
+.cascade-item-1 {
+  transition-delay: 0ms;
+}
+.cascade-item-2 {
+  transition-delay: 0ms;
+}
+.cascade-item-3 {
+  transition-delay: 0ms;
+}
+.cascade-item-4 {
+  transition-delay: 0ms;
+}
+.cascade-item-5 {
+  transition-delay: 50ms;
+}
+
+/* When parent is in view, animate cascade items */
+.animate-in .cascade-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes pulse-rainbow {
+  0% {
+    background-color: #ff0000;
+  }
+  16.6% {
+    background-color: #ff9900;
+  }
+  33.3% {
+    background-color: #ffff00;
+  }
+  50% {
+    background-color: #00ff00;
+  }
+  66.6% {
+    background-color: #0099ff;
+  }
+  83.3% {
+    background-color: #6633ff;
+  }
+  100% {
+    background-color: #ff0066;
+  }
+}
+
+.animate-pulse-rainbow {
+  animation: pulse-rainbow 5s infinite;
+}
+
+/* Dodaj style dla animacji pulsowania */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 1.5s infinite;
+}
+
+/* Dodaj style dla przycisku zatwierdzającego */
+.fixed-button {
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.fixed-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
 }

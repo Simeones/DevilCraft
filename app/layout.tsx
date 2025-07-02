@@ -1,20 +1,46 @@
-import type { Metadata } from 'next'
-import './globals.css'
+import type React from "react"
+import "./globals.css"
+import { Montserrat, Poppins } from "next/font/google"
+import { ThemeProvider } from "@/components/theme-provider"
+import Preloader from "@/components/preloader"
+import Navbar from "@/components/navbar"
+import CustomerReviews from "@/components/customer-reviews"
+import ScrollReset from "@/components/scroll-reset"
+import AiChat from "@/components/ai-chat"
 
-export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+})
+
+const poppins = Poppins({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-poppins",
+})
+
+export const metadata = {
+  title: "DevilCraft - Aluminiowe łodzie najwyższej jakości",
+  description: "Projektujemy i produkujemy najwyższej jakości łodzie aluminiowe.",
+    generator: 'v0.dev'
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="pl" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
+      <body className={`${montserrat.variable} ${poppins.variable} font-sans`}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <ScrollReset />
+          <Preloader />
+          <Navbar />
+          <div className="pt-16">{children}</div>
+          <CustomerReviews />
+          <AiChat />
+        </ThemeProvider>
+      </body>
     </html>
   )
 }

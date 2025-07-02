@@ -6,7 +6,7 @@ import Preloader from "@/components/preloader"
 import Navbar from "@/components/navbar"
 import CustomerReviews from "@/components/customer-reviews"
 import ScrollReset from "@/components/scroll-reset"
-import SocialMediaButtons from "@/components/instagram-button"
+import InstagramButton from "@/components/instagram-button"
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -39,7 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Navbar />
           <div className="pt-16">{children}</div>
           <CustomerReviews />
-          <SocialMediaButtons />
+          <InstagramButton />
         </ThemeProvider>
       </body>
     </html>

@@ -9,6 +9,7 @@ const config: Config = {
     "./src/**/*.{ts,tsx}",
     "*.{js,ts,jsx,tsx,mdx}",
   ],
+  prefix: "",
   theme: {
     container: {
       center: true,
@@ -18,23 +19,14 @@ const config: Config = {
       },
     },
     extend: {
-      fontFamily: {
-        sans: ["var(--font-poppins)", "sans-serif"],
-        montserrat: ["var(--font-montserrat)", "sans-serif"],
-      },
       colors: {
-        red: {
-          50: "#fff5f5",
-          100: "#ffe0e0",
-          200: "#ffc1c1",
-          300: "#ffa3a3",
-          400: "#ff8484",
-          500: "#ff6565",
-          600: "#ff0000", // Main red color (#FF0000)
-          700: "#e50000",
-          800: "#cc0000",
-          900: "#b30000",
-        },
+        cream: "#F5F1E8",
+        burgundy: "#8B4513",
+        olive: "#A0522D",
+        terracotta: "#CD853F",
+        warmBrown: "#8B4513",
+        goldAccent: "#DAA520",
+        stoneGray: "#696969",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -69,6 +61,10 @@ const config: Config = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
+      fontFamily: {
+        serif: ["Georgia", "Times New Roman", "serif"],
+        sans: ["Inter", "system-ui", "sans-serif"],
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -91,6 +87,6 @@ const config: Config = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+} satisfies Config
 
 export default config
